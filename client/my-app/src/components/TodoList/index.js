@@ -1,12 +1,16 @@
 import React from 'react';
-import ToDoItem from '../TodoItem';
+import TodoItem from '../TodoItem';
+// import styles from './TodoList.module.css';
 
 const TodoList = (props) => {
 
     return (
         <>
+        {/* <form className={styles['text-field']}>
+            <input type="text" className={styles['text-field_input']}/>
+        </form> */}
         <ul>
-            {props.todos.map(td => <ToDoItem item={td} key={td._id}/>)}
+            {props.todos.map(td => <TodoItem item={td} key={td._id}/>)}
         </ul>
         </>
     );

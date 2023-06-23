@@ -1,6 +1,7 @@
 import React from 'react';
 import {Formik, Form, Field} from 'formik';
 import {format} from 'date-fns';
+import styles from './TodoForm.module.css';
 
 const TodoForm = (props) => {
 
@@ -18,10 +19,10 @@ const onSubmit = (values, actions) => {
         initialValues={initialValues}
         onSubmit={onSubmit}>
         {(props) => (
-            <Form>
+            <Form className={styles['form-wrapper']}>
                 <Field name="body" placeholder="Enter your message"/>
                 <Field name="fdeadline" type="date"/>
-                <button type="submit">Tap me!</button>
+                <button type="submit" className={styles.button}>Tap me!</button>
             </Form>
             )}
         </Formik>

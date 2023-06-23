@@ -1,0 +1,16 @@
+.text-field {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+
+  .text-field_input {
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: 8px 8px;
+    line-height: 1.5;
+    font-size: 1rem;
+    background-clip: padding-box;
+    border:none;
+    border-radius: 10px;
+  }

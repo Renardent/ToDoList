@@ -1,14 +1,14 @@
 const bcrypt = require('bcrypt');
-const CONSTANTS = require('../configs/constant');
+const {SALT_ROUND} = require('../configs/constant');
 
 module.exports.hashPass = async (req,res,next) => {
     try {
         const {body, body: {password}} = req;
 
-        req.passwordHash = await bcrypt.hash(password, CONSTANTS.SALT_ROUND);
-        delete body.password;
+        req.passwordHash = await bcrypt.hash(password, 1);
+        // delete body.password;
         next();
     } catch(error) {
-
+        next(error);
     }
 }

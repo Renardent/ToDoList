@@ -1,7 +1,7 @@
 import CONSTANTS from '../constants';
 
 export const registerUser = async (data) => {
-    const responce = await fetch(`${CONSTANTS.API_BASE}/user/sign-up`,{
+    const responce = await fetch(`${CONSTANTS.API_BASE}/users/sign-up`,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -17,18 +17,16 @@ export const registerUser = async (data) => {
 } 
 
 export const loginUser = async (data) => {
-    const responce = await fetch(`${CONSTANTS.API_BASE}/user/sign-in`, {
+    const res = await fetch(`${CONSTANTS.API_BASE}/users/sign-in`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(data)
     });
-    if (responce.status === 400) {
-        const error = await responce.json();
+    if (res.status === 400) {
+        const error = await res.json();
         return Promise.reject(error);
        }
-
-       return responce.json();
-
+       return res.json();
 }
