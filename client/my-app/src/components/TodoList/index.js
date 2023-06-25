@@ -6,11 +6,8 @@ const TodoList = (props) => {
 
     return (
         <>
-        {/* <form className={styles['text-field']}>
-            <input type="text" className={styles['text-field_input']}/>
-        </form> */}
         <ul>
-            {props.todos.map(td => <TodoItem item={td} key={td._id}/>)}
+            {props.todos.map(td => <TodoItem item={td} key={td._id} delete={props.delCallback}/>)}
         </ul>
         </>
     );

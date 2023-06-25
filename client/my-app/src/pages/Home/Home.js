@@ -4,24 +4,13 @@ import {useNavigate} from "react-router-dom";
 import SignIn from '../../components/SignIn';
 import SignUp from '../../components/SignUp';
 import styles from './Home.module.css';
+import history from '../../browserHistory';
 
 const Home = (props) => {
     const [state, setState] = useState(true);
     // const [data, setData] = useState();
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-
-    // useEffect(()=> {
-    //     if(data) {
-    //     registerUser(data)
-    //     .then(result => {
-    //         props.sendUser(result);
-    //         navigate('/tasks');
-    //     })
-    //     .catch(err => {
-    //         setError(err)
-    //     })
-    // }}, [data]);
 
     const buttonHandler = () => {
         setState(state => !state);
@@ -32,7 +21,7 @@ const Home = (props) => {
         .then(result => {
             props.sendUser(result.data);
             localStorage.setItem('token', result.tokens.token);
-            navigate('/tasks');
+            navigate('/tasks')
         })
         .catch(err => {
             setError(err);

@@ -32,12 +32,11 @@ module.exports.loginUser = async (req, res, next) => {
 
 }
 
-module.exports.checkToken = async(req, res, next) => {
+module.exports.checkAuth = async(req, res, next) => {
     try {
-        const {params: {token}} = req;
-        const payload = await verifyToken(token);
+        const {tokenPayload: {email}}= req;
         const foundUser = await User.findOne({
-            email: payload.email
+            email: email
         });
         res.status(200).send({data: foundUser});
     } catch(error) {

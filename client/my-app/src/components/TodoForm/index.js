@@ -21,7 +21,7 @@ const onSubmit = (values, actions) => {
         {(props) => (
             <Form className={styles['form-wrapper']}>
                 <Field name="body" placeholder="Enter your message"/>
-                <Field name="fdeadline" type="date"/>
+                <Field name="deadline" type="date"/>
                 <button type="submit" className={styles.button}>Tap me!</button>
             </Form>
             )}

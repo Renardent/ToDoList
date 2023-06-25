@@ -1,6 +1,7 @@
 import CONSTANTS from '../constants';
+import history from '../browserHistory';
 
-export const getTasks = async (userId) => {
+export const getTasks = async () => {
     const token = localStorage.getItem('token');
     const responce = await fetch(`${CONSTANTS.API_BASE}/tasks/`, {
         method: 'GET',
@@ -10,10 +11,12 @@ export const getTasks = async (userId) => {
     });
     if (responce.status === 400) {
         const error = await responce.json();
+        history.push('/');
         return Promise.reject(error);
        }
        return responce.json();
 }
+
 
 export const createTask = async (data) => {
     const token = localStorage.getItem('token');
@@ -27,6 +30,7 @@ export const createTask = async (data) => {
     });
     if (responce.status === 400) {
      const error = await responce.json();
+     history.push('/');
      return Promise.reject(error);
     }
     return responce.json();
