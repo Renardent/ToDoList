@@ -30,3 +30,18 @@ export const loginUser = async (data) => {
        }
        return res.json();
 }
+
+export const authUser = async (token) => {
+    const res = await fetch(`${CONSTANTS.API_BASE}/users/`,  {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    if (res.status === 403) {
+        const error = await res.json();
+        return Promise.reject(error);
+    }
+
+    return res.json();
+}

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { useNavigate} from "react-router-dom";
 import TodoList from '../../components/TodoList';
 import {createTask, getTasks} from '../../api/taskApi';
+import {authUser} from '../../api/userApi';
 import TodoForm from '../../components/TodoForm';
 import styles from './TodoPage.module.css';
 
@@ -11,22 +12,33 @@ const TodoPage = (props) => {
 
   
     useEffect(()=> {
-      /*якщо юзера не існує - йде на домашню сторінку*/
-        if(!props.user) {
+      if(!props.user) {
+        const token = localStorage.getItem('token');
+        if (token) {
+            //// робимо запит на отримання юзера
+            authUser(token)
+            .then(userData => {
+                props.sendUser(userData.data);
+            }).catch(error => {
+                // якщо токен невалідний - перенаправляємо на авторизацію
+                return navigate('/');
+            })
+      } else {
           return navigate('/');
         }
+      } else {
         getTasks(props.user._id)
         .then(result => {
             setTodos(result.data);
         })
-        .catch(err => {
-            console.error(err);
+        .catch(error => {
+            console.error(error);
         })
-    }, []);
+    }}, [props.user]);
 
       const getNewTd = (data) => {
         createTask({
-          authorId: props.user._id,
+          // authorId: props.user._id,
           status: 'new',
           ...data
         }).then(({data:createdTask}) => {
